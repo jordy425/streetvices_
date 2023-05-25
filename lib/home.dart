@@ -17,14 +17,19 @@ class MyHomePage extends StatelessWidget {
             SizedBox(
               height: 25,
             ),
-            Image.network('', height: 150,),
+            Image.network(
+              'https://img.freepik.com/foto-gratis/tienda-ropa-tienda-ropa-perchas-tienda-boutique-moderna_1150-8886.jpg',
+              height: 150,
+            ),
             SizedBox(
               height: 25,
             ),
-            ElevatedButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => productos()));
-            }, 
-            child: Text('Productos'))
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => productos()));
+                },
+                child: Text('Productos'))
           ],
         ),
       ),

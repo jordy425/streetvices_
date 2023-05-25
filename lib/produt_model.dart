@@ -7,11 +7,12 @@ class Productos {
   final String nombre;
   final int cantidad;
   final double precio;
+
   const Productos({
     this.id,
-    required String this.nombre,
-    required int this.cantidad,
-    required double this.precio,
+    required this.nombre,
+    required this.cantidad,
+    required this.precio,
   });
 
   Map<String, dynamic> toMap(){
@@ -39,6 +40,31 @@ class Productos {
         precio: maps[i]['precio'],
       );
     });
+  }
+
+  static Future<int> insertProductos(Productos productos) async {
+    final Database db = await DbHelper.initDb();
+    final int result = await db.insert('productos', productos.toMap());
+    return result;
+  }
+
+  static Future<int> updateProductos(Productos productos) async {
+    final Database db = await DbHelper.initDb();
+    return await db.update(
+      'productos',
+      productos.toMap(),
+      where: 'id = ?',
+      whereArgs: [productos.id],
+    );
+  }
+  
+    static Future<int> deleteProductos(int id) async {
+    final Database db = await DbHelper.initDb();
+    return await db.delete(
+      'productos',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 
 }
